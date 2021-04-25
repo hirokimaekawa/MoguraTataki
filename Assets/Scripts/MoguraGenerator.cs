@@ -6,7 +6,7 @@ public class MoguraGenerator : MonoBehaviour
 {
     public GameObject moguraPrefab;
     bool isThereMogura;
-    public Collider moguraCollider;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,13 +29,6 @@ public class MoguraGenerator : MonoBehaviour
             Debug.Log("成功");
         }
     }
-    public void HideColliderMogura()
-    {
-        moguraCollider.enabled = false;
-    }
-    public void ShowColliderMogura()
-    {
-        moguraCollider.enabled = true;
-    }
+   
 }
 

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6795380051420352267}
   - component: {fileID: 7737069897341267160}
   - component: {fileID: 1241068155138920459}
-  - component: {fileID: 2418396174639468007}
+  - component: {fileID: 4542970449199443379}
   m_Layer: 0
   m_Name: Mogura
   m_TagString: MOGURA
@@ -222,7 +222,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.26, y: 2.2704468}
   m_Size: {x: 5.186277, y: 5.5408936}
   m_Direction: 0
---- !u!114 &2418396174639468007
+--- !u!114 &4542970449199443379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,8 +231,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6795380051420352261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d12d665f4e66b4a0891c4d6ef5f5e13f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ea44577ddd074345a7e56a940aef327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moguraPrefab: {fileID: 0}
-  moguraCollider: {fileID: 0}
