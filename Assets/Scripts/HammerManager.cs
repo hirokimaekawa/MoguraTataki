@@ -6,13 +6,15 @@ public class HammerManager : MonoBehaviour
 {
     //Animator animator;
     public GameObject hammerObject;
-
+    Collider2D hammerCollider;
     Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         animator =　GetComponent<Animator>();
+        hammerCollider = GetComponent<Collider2D>();
+        HideColliderHammer();
     }
 
     // Update is called once per frame
@@ -29,6 +31,17 @@ public class HammerManager : MonoBehaviour
             animator.SetTrigger("Move0");
         }
        
+    }
+
+    public void HideColliderHammer()
+    {
+        hammerCollider.enabled = false;
+        Debug.Log("ハンマーコライダーが消えた");
+    }
+    public void ShowColliderHammer()
+    {
+        hammerCollider.enabled = true;
+        Debug.Log("ハンマーコライダーがついた");
     }
 
 }
