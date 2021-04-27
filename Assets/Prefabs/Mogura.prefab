@@ -117,7 +117,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6795380051420352261}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -234,3 +234,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea44577ddd074345a7e56a940aef327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pikopikoSE: {fileID: 8300000, guid: 16b72e52198134da0b15ac6075da2ac3, type: 3}

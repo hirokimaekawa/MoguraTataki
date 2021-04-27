@@ -9,11 +9,13 @@ public class GameManager : MonoBehaviour
     public MoguraGenerator moguraGenerator2;
     public MoguraGenerator moguraGenerator3;
 
-    public Text ScoreText;
-    public Text LeftTimeText;
+    public Text scoreText;
+    public Text leftTimeText;
 
+    public GameObject resultPanal;
+    public Text finalText;
     int score = 0;
-    float leftTime;
+    float leftTime = 30;
 
     // Start is called before the first frame update
     void Start()
@@ -21,13 +23,24 @@ public class GameManager : MonoBehaviour
         StartCoroutine("CreateMogura1");
         StartCoroutine("CreateMogura2");
         StartCoroutine("CreateMogura3");
-        ScoreText.text = "得点：" + score;
+        scoreText.text = "得点：" + score;
+        resultPanal.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //1秒に1秒ずつ減らしていく
+        leftTime -= Time.deltaTime;
+        //マイナスは表示しない
+        if (leftTime < 0) leftTime = 0;
+
+        leftTimeText.text = "残り時間：" + ((int)leftTime).ToString(); 
+        if (leftTime <= 0)
+        {
+            resultPanal.SetActive(true);
+            finalText.text = scoreText.text;
+        }
     }
     IEnumerator CreateMogura1()
     {
@@ -49,6 +62,6 @@ public class GameManager : MonoBehaviour
     {
         score += 10;
 
-        ScoreText.text = "SCORE:" + score;
+        scoreText.text = "得点:" + score;
     }
 }

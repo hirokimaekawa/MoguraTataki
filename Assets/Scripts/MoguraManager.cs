@@ -7,10 +7,13 @@ public class MoguraManager : MonoBehaviour
     Collider2D moguraCollider;
     Animator animator;
     GameManager gameManager;
+    AudioSource audioSource;
+    public AudioClip pikopikoSE;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
         moguraCollider = GetComponent<Collider2D>();
@@ -36,6 +39,7 @@ public class MoguraManager : MonoBehaviour
     {
         //次やること、攻撃を受けたら、得点が追加される
         animator.SetTrigger("Hurt");
+        audioSource.PlayOneShot(pikopikoSE);
         gameManager.AddScore();
         HideColliderMogura();
     }
