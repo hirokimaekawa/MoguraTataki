@@ -8,6 +8,7 @@ public class HammerManager : MonoBehaviour
     public GameObject hammerObject;
     Collider2D hammerCollider;
     Animator animator;
+    public GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +26,13 @@ public class HammerManager : MonoBehaviour
         var pos = Camera.main.ScreenToWorldPoint(mousePosition);
         hammerObject.transform.position = pos;
 
-        if (Input.GetMouseButtonDown(0))
+        if (gameManager.resultPanal.activeSelf == false) 
         {
-            Debug.Log("入力されてる");
-            animator.SetTrigger("Move0");
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("入力されてる");
+                animator.SetTrigger("Move0");
+            }
         }
        
     }
@@ -43,5 +47,6 @@ public class HammerManager : MonoBehaviour
         hammerCollider.enabled = true;
         Debug.Log("ハンマーコライダーがついた");
     }
+
 
 }

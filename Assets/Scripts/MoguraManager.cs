@@ -23,6 +23,7 @@ public class MoguraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position -= new Vector3(0,0.1f,0);
     }
     public void HideColliderMogura()
     {
@@ -42,5 +43,16 @@ public class MoguraManager : MonoBehaviour
         audioSource.PlayOneShot(pikopikoSE);
         gameManager.AddScore();
         HideColliderMogura();
+        StartCoroutine(Damage());
     }
+    IEnumerator Damage()
+    {
+        
+        yield return new WaitForSeconds(0.5f);
+        animator.enabled = false;
+        yield return new WaitForSeconds(1.0f);
+        animator.enabled = true;
+        animator.Play("float@mogura");
+    }
+
 }

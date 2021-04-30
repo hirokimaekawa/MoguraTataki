@@ -41,6 +41,13 @@ public class GameManager : MonoBehaviour
             resultPanal.SetActive(true);
             finalText.text = scoreText.text;
         }
+
+        //resultPanal.activeSelf == trueの時に、クリックできなくするか
+        if (resultPanal.activeSelf == true)
+        {
+
+        }
+        
     }
     IEnumerator CreateMogura1()
     {
