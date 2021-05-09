@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,7 +17,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject resultPanal;
     public Text finalText;
-    int score = 0;
+    int score;
+    string playTime;
     float leftTime = 30;
 
     // Start is called before the first frame update
@@ -25,6 +29,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine("CreateMogura3");
         scoreText.text = "得点：" + score;
         resultPanal.SetActive(false);
+        Load();
     }
 
     // Update is called once per frame
@@ -42,11 +47,7 @@ public class GameManager : MonoBehaviour
             finalText.text = scoreText.text;
         }
 
-        //resultPanal.activeSelf == trueの時に、クリックできなくするか
-        if (resultPanal.activeSelf == true)
-        {
-
-        }
+      
         
     }
     IEnumerator CreateMogura1()
@@ -71,4 +72,51 @@ public class GameManager : MonoBehaviour
 
         scoreText.text = "得点:" + score;
     }
+
+    void InitScore()
+    {
+        //スコア初期化
+        score = 0;
+    }
+
+
+    public void OnTitleButton()
+    {
+        SceneManager.LoadScene("Title");
+        InitScore();
+        Record();
+    }
+    public void OnRetryButton()
+    {
+        SceneManager.LoadScene("Main");
+        InitScore();
+        Record();
+    }
+
+    string SAVEKEY1 = "PLAY-TIME-KEY";
+    string SAVEKEY2 = "SCORE-KEY";
+
+    void Record()
+    {
+        playTime = System.DateTime.Now.ToString();
+        PlayerPrefs.SetString(SAVEKEY1, playTime);
+        PlayerPrefs.SetInt(SAVEKEY2,score);
+        PlayerPrefs.Save();
+    }
+    void Load()
+    {
+        string playTimeText = PlayerPrefs.GetString(SAVEKEY1, playTime);
+        int playScore = PlayerPrefs.GetInt(SAVEKEY2,score);
+        Debug.Log(playTimeText);
+        Debug.Log(playScore);
+       
+    }
+
+    void DeleteSaveData()
+    {
+        PlayerPrefs.SetString(SAVEKEY1, playTime);
+        PlayerPrefs.Save();
+    }
+
+
 }

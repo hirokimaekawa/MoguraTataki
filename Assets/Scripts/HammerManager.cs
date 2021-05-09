@@ -21,13 +21,9 @@ public class HammerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var mousePosition = Input.mousePosition;
-        mousePosition.z = 10;
-        var pos = Camera.main.ScreenToWorldPoint(mousePosition);
-        hammerObject.transform.position = pos;
-
-        if (gameManager.resultPanal.activeSelf == false) 
+        if (gameManager.resultPanal.activeSelf == false)
         {
+            ShowHammer();
             if (Input.GetMouseButtonDown(0))
             {
                 Debug.Log("入力されてる");
@@ -35,6 +31,14 @@ public class HammerManager : MonoBehaviour
             }
         }
        
+    }
+
+    void ShowHammer()
+    {
+        var mousePosition = Input.mousePosition;
+        mousePosition.z = 10;
+        var pos = Camera.main.ScreenToWorldPoint(mousePosition);
+        hammerObject.transform.position = pos;
     }
 
     public void HideColliderHammer()
