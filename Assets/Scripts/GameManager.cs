@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playTime = System.DateTime.Now.ToString();
         //1秒に1秒ずつ減らしていく
         leftTime -= Time.deltaTime;
         //マイナスは表示しない
@@ -45,6 +46,10 @@ public class GameManager : MonoBehaviour
         {
             resultPanal.SetActive(true);
             finalText.text = scoreText.text;
+            //Debug.Log("時間になった");
+            //Debug.Log(score);
+            //Debug.Log(playTime);
+            Record();
         }
 
       
@@ -84,13 +89,13 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Title");
         InitScore();
-        Record();
+        
     }
     public void OnRetryButton()
     {
         SceneManager.LoadScene("Main");
         InitScore();
-        Record();
+        
     }
 
     string SAVEKEY1 = "PLAY-TIME-KEY";
@@ -98,25 +103,25 @@ public class GameManager : MonoBehaviour
 
     void Record()
     {
-        playTime = System.DateTime.Now.ToString();
         PlayerPrefs.SetString(SAVEKEY1, playTime);
         PlayerPrefs.SetInt(SAVEKEY2,score);
         PlayerPrefs.Save();
     }
     void Load()
     {
-        string playTimeText = PlayerPrefs.GetString(SAVEKEY1, playTime);
-        int playScore = PlayerPrefs.GetInt(SAVEKEY2,score);
-        Debug.Log(playTimeText);
-        Debug.Log(playScore);
+        PlayerPrefs.GetString(SAVEKEY1, playTime);
+        PlayerPrefs.GetInt(SAVEKEY2,score);
+        Debug.Log(score);
+        Debug.Log(playTime);
+        Debug.Log("ロードした");
        
     }
 
-    void DeleteSaveData()
+    /*void DeleteSaveData()
     {
         PlayerPrefs.SetString(SAVEKEY1, playTime);
         PlayerPrefs.Save();
-    }
+    }*/
 
 
 }
