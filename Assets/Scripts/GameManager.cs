@@ -29,7 +29,15 @@ public class GameManager : MonoBehaviour
         StartCoroutine("CreateMogura3");
         scoreText.text = "得点：" + score;
         resultPanal.SetActive(false);
-        Load();
+
+        string[] times = PlayerPrefsX.GetStringArray(TimeKEY);  //[0,0,0]
+        int[] scores = PlayerPrefsX.GetIntArray(KEY);  //[0,0,0]
+
+        for (int i = 0; i < scores.Length; i++)
+        {
+            Debug.Log($"得点:{scores[i]} 時間:{times[i]}");
+            // aaa.text = $"得点:{scores[i]} 時間:{times[i]}";
+        }
     }
 
     // Update is called once per frame
@@ -42,14 +50,13 @@ public class GameManager : MonoBehaviour
         if (leftTime < 0) leftTime = 0;
 
         leftTimeText.text = "残り時間：" + ((int)leftTime).ToString(); 
-        if (leftTime <= 0)
+        if (leftTime == 0)
         {
             resultPanal.SetActive(true);
             finalText.text = scoreText.text;
             //Debug.Log("時間になった");
             //Debug.Log(score);
             //Debug.Log(playTime);
-            Record();
         }
 
       
@@ -88,40 +95,74 @@ public class GameManager : MonoBehaviour
     public void OnTitleButton()
     {
         SceneManager.LoadScene("Title");
+        SaveScore(score);
+        SaveTime(DateTime.Now.ToString());
         InitScore();
         
     }
     public void OnRetryButton()
     {
         SceneManager.LoadScene("Main");
+        SaveScore(score);
+        SaveTime(DateTime.Now.ToString());
         InitScore();
         
     }
 
-    string SAVEKEY1 = "PLAY-TIME-KEY";
-    string SAVEKEY2 = "SCORE-KEY";
+    string KEY = "KEY";
+    string TimeKEY = "TimeKEY";
 
     void Record()
     {
-        PlayerPrefs.SetString(SAVEKEY1, playTime);
-        PlayerPrefs.SetInt(SAVEKEY2,score);
-        PlayerPrefs.Save();
+        //PlayerPrefs.SetString(SAVEKEY1, playTime);
+        //PlayerPrefs.SetInt(SAVEKEY2,score);
+        //PlayerPrefs.Save();
     }
     void Load()
     {
-        PlayerPrefs.GetString(SAVEKEY1, playTime);
-        PlayerPrefs.GetInt(SAVEKEY2,score);
-        Debug.Log(score);
-        Debug.Log(playTime);
-        Debug.Log("ロードした");
+        //PlayerPrefs.GetString(SAVEKEY1, playTime);
+        //PlayerPrefs.GetInt(SAVEKEY2,score);
+        //Debug.Log(score);
+        //Debug.Log(playTime);
+        //Debug.Log("ロードした");
        
     }
 
-    /*void DeleteSaveData()
+    void SaveTime(string time)
     {
-        PlayerPrefs.SetString(SAVEKEY1, playTime);
-        PlayerPrefs.Save();
-    }*/
+        string[] times = PlayerPrefsX.GetStringArray(TimeKEY);  //[0,0,0]// 取得
+        times = Add(times, time);// 新しい得点を追加
+        Debug.Log(string.Join(",", times)); // 配列の要素を,区切りのstring型で表示する
+        PlayerPrefsX.SetStringArray(TimeKEY, times); // 保存
+    }
 
+
+    // 追加するための関数
+    string[] Add(string[] array, string point)
+    {
+        List<string> tmp = array.ToList();// リストへ変換
+        tmp.Add(point);
+        return tmp.ToArray();// 配列に戻す
+    }
+
+
+
+    void SaveScore(int score)
+    {
+        // 取得
+        int[] scores = PlayerPrefsX.GetIntArray(KEY);  //[0,0,0]
+        scores = Add(scores, score);// 新しい得点を追加
+        Debug.Log(string.Join(",", scores)); // 配列の要素を,区切りのstring型で表示する
+        PlayerPrefsX.SetIntArray(KEY, scores);// 保存
+    }
+
+
+    // 追加するための関数
+    int[] Add(int[] array, int point)
+    {
+        List<int> tmp = array.ToList();// リストへ変換
+        tmp.Add(point);
+        return tmp.ToArray();// 配列に戻す
+    }
 
 }
