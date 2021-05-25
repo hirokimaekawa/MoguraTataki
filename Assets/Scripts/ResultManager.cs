@@ -38,8 +38,8 @@ public class ResultManager : MonoBehaviour
         //得点を新しい順に表示するコード
         var zip = scoreList.Zip(timesList, (scores, times) => new { scores, times })
                     .OrderByDescending(pair => pair.times)
-                    .Select((pair, index) => $"No.{index + 1} {pair.times} 得点：{pair.scores}");
-
+                    .Select((pair, index) => $"{pair.times} 得点：{pair.scores}");
+        //削除：No.{index + 1}
         foreach (string A in zip)
         {
 
@@ -69,7 +69,7 @@ public class ResultManager : MonoBehaviour
         var timesList = PlayerPrefsX.GetStringArray("TimeKEY");
         var zip2 = scoreList.Zip(timesList, (scores, times) => new { scores, times })
             .OrderByDescending(pair => pair.scores)
-                            .Select((pair, index) => $" No.{index + 1} {pair.times} 得点：{pair.scores}")
+                            .Select((pair, index) => $"第{index + 1}位{pair.times} 得点：{pair.scores}")
                             .ToArray();
         for (int i = 0; i < zip2.Length; i++)
         {
@@ -87,7 +87,7 @@ public class ResultManager : MonoBehaviour
         var timesList = PlayerPrefsX.GetStringArray("TimeKEY");
         var zip2 = scoreList.Zip(timesList, (scores, times) => new { scores, times })
             .OrderByDescending(pair => pair.times)
-                            .Select((pair, index) => $" No.{index + 1} {pair.times} 得点：{pair.scores}")
+                            .Select((pair, index) => $"{pair.times} 得点：{pair.scores}")
                             .ToArray();
         for (int i = 0; i < zip2.Length; i++)
         {
