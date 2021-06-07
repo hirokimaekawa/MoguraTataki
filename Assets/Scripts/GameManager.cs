@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("ja-JP",false);
+        Debug.Log(DateTime.Now.ToString("yyyy年MM月dd日tthh:mm",ci));
+        SaveTime(DateTime.Now.ToString("yyyy年MM月dd日tthh:mm", ci));
+
         StartCoroutine("CreateMogura1");
         StartCoroutine("CreateMogura2");
         StartCoroutine("CreateMogura3");
@@ -96,7 +100,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Title");
         SaveScore(score);
-        SaveTime(DateTime.Now.ToString());
+        //SaveTime(DateTime.Now.ToString());
         InitScore();
         
     }
@@ -104,7 +108,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Main");
         SaveScore(score);
-        SaveTime(DateTime.Now.ToString());
+        //SaveTime(DateTime.Now.ToString());
         InitScore();
         
     }
