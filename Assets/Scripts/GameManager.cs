@@ -47,9 +47,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playTime = System.DateTime.Now.ToString();
+        playTime = System.DateTime.Now.ToString();//playtimeなくてもいい？
+
         //1秒に1秒ずつ減らしていく
-        leftTime -= Time.deltaTime;
+        leftTime -= Time.deltaTime;//floatじゃないと使えないみたい
         //マイナスは表示しない
         if (leftTime < 0) leftTime = 0;
 
